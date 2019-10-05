@@ -1,0 +1,52 @@
+Seu nome:
+
+1)
+select *
+from en_filme filme
+where filme.data_lancamento = (select min(data_lancamento) from en_filme);
+ou
+select *
+from en_filme filme
+order by filme.data_lancamento
+limit 1;
+
+2)
+select cliente.id_cliente, cliente.nome, count(ea) contagem
+from en_cliente cliente
+         left join en_aluguel ea on cliente.id_cliente = ea.id_cliente
+group by cliente.id_cliente
+order by contagem;
+
+
+3)
+para chegar naquela projecao foi usada essa consulta
+select cliente.id_cliente, cliente.nome, count(ea) alugueis, sum(ea.valor) total_gasto, extract('years' from data_aluguel) ano
+from en_cliente cliente
+         inner join en_aluguel ea on cliente.id_cliente = ea.id_cliente
+group by ea.data_aluguel, cliente.id_cliente
+order by total_gasto desc;
+
+
+porem a forma como interpretei o resultado "Ordene pelo maior valor gasto por ano." no desafio
+foi que deveria ser ordenado do maior total_gasto para o menor total_gasto condicionado do maior ano ate o menor ano,
+entao a consulta seria assim:
+
+select cliente.id_cliente,
+       cliente.nome,
+       count(ea)                          alugueis,
+       sum(ea.valor)                      total_gasto,
+       extract('years' from data_aluguel) ano
+from en_cliente cliente
+         inner join en_aluguel ea on cliente.id_cliente = ea.id_cliente
+group by ea.data_aluguel, cliente.id_cliente
+order by ano desc,  total_gasto desc;
+
+resultando numa tabela parecida com a abaixo.
+
+id  |   nome        | alugueis  | total_gasto   | ano
+----+---------------+-----------+---------------+------
+4   |	Felippe	    |   2       | 23.54	        | 2019
+1	|   Ana	        |   2       | 15.8	        | 2019
+2	|   João	    |   1       | 4.9	        | 2019
+4	|   Felippe	    |   1       | 1.99	        | 2015
+4	|   Felippe	    |   1       | 5.99	        | 2000

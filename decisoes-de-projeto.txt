@@ -1,0 +1,17 @@
+1 - Primeiramente foram criadas as Classes de implementacao para o filme e aluguel,
+2 - Visando seguir o padrao de escrita de codigo da Classe Cliente que ja foi implementado,
+decidi seguir a mesma linha para manter em conformidade do projeto.
+3 - Para Chegar na i18n(internacionalizacao) separei todas as mensagens que iam aparecer na tela ou console para uma classe de constantes
+4 - Construi testes formais(Automatizados a nivel de unidade para verificar e garantir qualidade do resultado)
+6 - Implementei dentro da Classe principal Main a execucao do crud como pedido pelo desafio
+7 - Tentei separar o possivel a chamadas de metodo seguindo a ideia do Principio de Responsabilidade Unica do Livro Clean Code/Codigo Limpo
+8 - Tentei eliminar ao maximo possivel codigo duplicado usando a ferramenta SonarLint
+9 - Com a ferramenta Sonarlint usar um analisador para deixar o codigo com os melhores padroes comerciais possiveis
+
+Passos que planejava fazer mais nao sabia se valeria no desafio:
+-> implementar a coluna em todas as tabelas chamada status, fazendo com o que o processo de delecao de dados seja logico ao inves de fisico, tornando-os recuperaveis.
+
+
+Analise de Requisitos complementares sobre Filmes e Alugueis, Regras de Negocio
+Caso 1: Caso um filme seja inserido, este nao necessariamente precisa estar alugado(ter registro de aluguel e relacao)
+Caso 2: Caso um aluguel seja inserido, este precista estar relacionado com um filme
