@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 import static java.util.logging.Level.*;
 import static recursos.ConfigConstantes.*;
+import static recursos.Constantes.EXCECAO;
 import static recursos.Constantes.LISTA_DE;
 
 
@@ -39,7 +40,7 @@ public class Main {
         Connection conn = null;
         try {
             Class.forName(DB_TYPE);
-            conn = DriverManager.getConnection(URL_DB, USER_DB, PASS_DB);
+            conn = DriverManager.getConnection(URL_DB, USER_DB, SENHA_DB);
             conn.setAutoCommit(false);
 
             //Demonstrar o funcionamento aqui
@@ -48,12 +49,12 @@ public class Main {
             crudAluguel(conn);
 
         } catch (Exception e) {
-            logger.log(SEVERE, "Foi causada uma excecao que travou a execucao da aplicacao", e);
+            logger.log(SEVERE, EXCECAO, e);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
-                logger.log(SEVERE, "Foi causada uma excecao enquanto houve tentativa de disconeccao com o banco de dados ", e);
+                logger.log(SEVERE, EXCECAO, e);
             }
         }
         logger.log(INFO, Constantes.FIM_TESTE);

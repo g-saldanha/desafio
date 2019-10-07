@@ -6,10 +6,8 @@ import entidades.Filme;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import recursos.ConfigConstantes;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.Collection;
 import java.util.Date;
 
@@ -24,7 +22,7 @@ public class FilmeDAOImplCRUDTest {
 
     @Before
     public void setUp() throws Exception {
-        this.conn = getConnection(URL_DB, USER_DB, PASS_DB);
+        this.conn = getConnection(URL_DB, USER_DB, SENHA_DB);
         this.conn.setAutoCommit(false);
         this.filme = new Filme(null, new Date(1262311200000L), "Inception", "Filme de ficção científica/Thriller");
     }

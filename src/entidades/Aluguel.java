@@ -70,15 +70,19 @@ public class Aluguel {
         return this;
     }
 
+    public List<String> getNomesFilmes() {
+        return this.filmes.stream().map(
+                Filme::getNome
+        ).collect(Collectors.toList());
+    }
+
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        List<String> nomeDosFilmes = this.filmes.stream().map(
-                Filme::getNome
-        ).collect(Collectors.toList());
+
         return "Aluguel{" +
                 "idAluguel=" + this.idAluguel +
-                ", filmes=" + nomeDosFilmes +
+                ", filmes=" + this.getNomesFilmes() +
                 ", cliente=" + this.cliente +
                 ", dataAluguel=" + sdf.format(this.dataAluguel) +
                 ", valor=" + NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(this.valor) +

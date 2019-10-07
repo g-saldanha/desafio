@@ -50,7 +50,7 @@ public class FilmeDAOImpl implements FilmeDAO {
     @Override
     public void delete(Connection conn, Integer idFilme) throws Exception {
         this.deleteRelationship(conn, idFilme);
-        PreparedStatement myStmt = conn.prepareStatement("delete from en_filme where id_filme = (?)");
+        PreparedStatement myStmt = conn.prepareStatement("update en_filme set status = false where id_filme = (?)");
 
         myStmt.setInt(1, idFilme);
         myStmt.execute();
@@ -67,7 +67,7 @@ public class FilmeDAOImpl implements FilmeDAO {
 
     @Override
     public Filme find(Connection conn, Integer idFilme) throws Exception {
-        PreparedStatement myStmt = conn.prepareStatement("select * from en_filme where id_filme = (?)");
+        PreparedStatement myStmt = conn.prepareStatement("select * from en_filme where id_filme = (?) and status = true");
         myStmt.setInt(1, idFilme);
 
         ResultSet myRs = myStmt.executeQuery();
@@ -86,7 +86,7 @@ public class FilmeDAOImpl implements FilmeDAO {
 
     @Override
     public Collection<Filme> list(Connection conn) throws Exception {
-        PreparedStatement myStmt = conn.prepareStatement("select * from en_filme order by nome;");
+        PreparedStatement myStmt = conn.prepareStatement("select * from en_filme where status = true order by nome;");
         ResultSet myRs = myStmt.executeQuery();
 
         Collection<Filme> filmes = new ArrayList<>();

@@ -90,7 +90,7 @@ public class AluguelDAOImpl implements AluguelDAO {
     public void delete(Connection conn, Aluguel aluguel) throws Exception {
         this.deleteRelationship(conn, aluguel);
 
-        PreparedStatement myStmt = conn.prepareStatement("delete from en_aluguel where id_aluguel = (?)");
+        PreparedStatement myStmt = conn.prepareStatement("update en_aluguel set status = false where id_aluguel = (?)");
 
         myStmt.setInt(1, aluguel.getIdAluguel());
 
@@ -110,7 +110,7 @@ public class AluguelDAOImpl implements AluguelDAO {
 
     @Override
     public Aluguel find(Connection conn, Integer idAluguel) throws Exception {
-        PreparedStatement myStmt = conn.prepareStatement("select * from en_aluguel where id_aluguel = (?);");
+        PreparedStatement myStmt = conn.prepareStatement("select * from en_aluguel where id_aluguel = (?) and status = true;");
 
         myStmt.setInt(1, idAluguel);
 
@@ -157,7 +157,7 @@ public class AluguelDAOImpl implements AluguelDAO {
     @Override
     public Collection<Aluguel> list(Connection conn) throws Exception {
 
-        PreparedStatement myStmt = conn.prepareStatement("select * from en_aluguel order by id_aluguel");
+        PreparedStatement myStmt = conn.prepareStatement("select * from en_aluguel where  status = true order by id_aluguel");
 
         ResultSet myRs = myStmt.executeQuery();
 

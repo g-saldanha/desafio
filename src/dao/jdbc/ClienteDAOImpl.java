@@ -44,7 +44,7 @@ public class ClienteDAOImpl implements ClienteDAO {
     @Override
     public void delete(Connection conn, Integer idCliente) throws Exception {
 
-        PreparedStatement myStmt = conn.prepareStatement("delete from en_cliente where id_cliente = ?");
+        PreparedStatement myStmt = conn.prepareStatement("update en_cliente set status = false where id_cliente = ?");
 
         myStmt.setInt(1, idCliente);
 
@@ -56,7 +56,7 @@ public class ClienteDAOImpl implements ClienteDAO {
     @Override
     public Collection<Cliente> list(Connection conn) throws Exception {
 
-        PreparedStatement myStmt = conn.prepareStatement("select * from en_cliente order by nome");
+        PreparedStatement myStmt = conn.prepareStatement("select * from en_cliente where status = true order by nome");
         ResultSet myRs = myStmt.executeQuery();
 
         Collection<Cliente> items = new ArrayList<>();
@@ -73,7 +73,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
     public Cliente find(Connection conn, Integer idCliente) throws Exception {
-        PreparedStatement myStmt = conn.prepareStatement("select * from en_cliente where id_cliente = ?");
+        PreparedStatement myStmt = conn.prepareStatement("select * from en_cliente where id_cliente = ? and status = true");
 
         myStmt.setInt(1, idCliente);
 

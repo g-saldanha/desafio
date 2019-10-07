@@ -1,17 +1,23 @@
-1 - Primeiramente foram criadas as Classes de implementacao para o filme e aluguel,
-2 - Visando seguir o padrao de escrita de codigo da Classe Cliente que ja foi implementado,
+Para rodar corretamente e necessário seguir os passos que estão no arquivo README.md
+
+1 — Primeiramente foram criadas as Classes de implementação para o filme e aluguel das respectivas interfaces FilmeDAO e AluguelDAO.
+2 — Visando seguir o padrão de escrita de código da Classe Cliente que já foi implementado,
 decidi seguir a mesma linha para manter em conformidade do projeto.
-3 - Para Chegar na i18n(internacionalizacao) separei todas as mensagens que iam aparecer na tela ou console para uma classe de constantes
-4 - Construi testes formais(Automatizados a nivel de unidade para verificar e garantir qualidade do resultado)
-6 - Implementei dentro da Classe principal Main a execucao do crud como pedido pelo desafio
-7 - Tentei separar o possivel a chamadas de metodo seguindo a ideia do Principio de Responsabilidade Unica do Livro Clean Code/Codigo Limpo
-8 - Tentei eliminar ao maximo possivel codigo duplicado usando a ferramenta SonarLint
-9 - Com a ferramenta Sonarlint usar um analisador para deixar o codigo com os melhores padroes comerciais possiveis
+3 — Para Chegar na i18n(internacionalização) separei todas as mensagens que iam aparecer na tela ou console para uma classe de constantes
+4 — Construí testes formais(Automatizados ao nível de unidade para verificar e garantir qualidade do resultado) com JUnit
+6 — Implementei dentro da Classe principal Main a execução de cada crud como pedido pelo desafio, cada ação do crud foi separada em métodos para fácil leitura da implementação
+7 — Tentei separar o possível as chamadas de método seguindo a ideia do princípio de Responsabilidade Única do Livro Clean Code/Código Limpo
+8 — Tentei eliminar ao máximo possível código duplicado usando a ferramenta SonarLint de análise de código
+9 — Com a ferramenta Sonarlint usei um analisador para deixar o código com os melhores padrões comerciais possíveis de qualidade de código
+10 — Para a apresentação da implementação decidi demonstrar também com uma interface onde o usuário pudesse interagir com o código implementado e avaliar;
+Estava em dúvida a escolher o tipo entre interface textual, gráfica(aplicativo desktop) ou web + REST, após sanar a dúvida com o pessoal da PariPassu decidi ir pelo caminho da interface gráfica.
+11 — Implementei a coluna (status) em todas as tabelas sql de entidade, fazendo com o que o processo de deleção de dados seja logico ao invés de físico, tornando-os recuperáveis e existentes na linha do tempo dos Aluguéis por exemplo.
 
-Passos que planejava fazer mais nao sabia se valeria no desafio:
--> implementar a coluna em todas as tabelas chamada status, fazendo com o que o processo de delecao de dados seja logico ao inves de fisico, tornando-os recuperaveis.
+Análise de Requisitos complementares sobre Filmes e Aluguéis, Regras de Negócio com as novas tabelas.
 
+Caso 1: Caso um filme seja inserido, este não necessariamente precisa estar alugado(ter registro de aluguel e relação).
 
-Analise de Requisitos complementares sobre Filmes e Alugueis, Regras de Negocio
-Caso 1: Caso um filme seja inserido, este nao necessariamente precisa estar alugado(ter registro de aluguel e relacao)
-Caso 2: Caso um aluguel seja inserido, este precista estar relacionado com um filme
+Caso 2: Caso um aluguel seja inserido, este pode ou não estar relacionado com um filme.
+
+Caso 3: Caso um filme seja deletado, este irá constar no registro de aluguel realizado anteriormente, porem não vai aparecer na lista de filmes por não estar mais presente no estado atual da base de dados.
+
